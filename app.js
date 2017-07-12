@@ -1,7 +1,10 @@
 const express = require( 'express' );
 const app = express();
 const nunjucks = require('nunjucks');
+app.set('view engine', 'html');
+app.engine('html', nunjucks.render);
 nunjucks.configure('views', {noCache: true});
+
 
 var example_dict =  {title: 'An Example',
     people: [
@@ -21,9 +24,7 @@ app.use(function(req, res, next){
 
 app.get('/', function(req, res, next){
 	// res.send('Hey')
-	nunjucks.render('index.html', example_dict, function (err, output) {
-    console.log(output);
-	});
+	res.render('index.html', example_dict);
 
 })
 
