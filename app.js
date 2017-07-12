@@ -1,5 +1,7 @@
 const express = require( 'express' );
 const app = express();
+const nunjucks = require('nunjucks');
+nunjucks.configure('views', {express: app});
 
 app.listen(3000, function(){
 	console.log("server listening")
