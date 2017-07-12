@@ -7,6 +7,7 @@ app.listen(3000, function(){
 
 app.use(function(req, res, next){
 	console.log(req.method, req.originalUrl)
+	next()
 })
 
 app.get('/', function(req, res, next){
