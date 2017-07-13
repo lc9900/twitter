@@ -1,4 +1,5 @@
 const express = require( 'express' );
+const path = require('path');
 const app = express();
 const nunjucks = require('nunjucks');
 const routes = require('./routes');
@@ -12,6 +13,7 @@ app.listen(3000, function(){
 })
 
 app.use('/', routes);
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 var example_dict =  {title: 'An Example',
     people: [
