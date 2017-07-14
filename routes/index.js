@@ -5,7 +5,7 @@ const router = express.Router();
 const tweetBank = require('../tweetBank');
 
 module.exports = function(io){
-	
+
 	router.get('/', function (req, res) {
 		let tweets = tweetBank.list();
 		res.render( 'index', { tweets: tweets, showForm: true} );
@@ -15,7 +15,10 @@ module.exports = function(io){
 		var name = req.body.name;
 		var text = req.body.text;
 		tweetBank.add(name, text);
-		res.redirect('/');
+        var obj = {name: name, content: text};
+        var singleTweet = tweetBank.find(obj);
+        io.sockets.emit('newTweet', singleTweet[0]);
+		// res.redirect('/');
 	});
 
 	router.get('/users/:name', function(req, res) {
